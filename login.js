@@ -59,22 +59,25 @@ function handleClassAdding(domNode, isValid) {
     domNode.classList.remove(invalidClass)
   }
 }
+
+btn2.addEventListener('click', (event) => {
+
+  event.preventDefault();
+  for (let i = 1; i < users.length; i++) {
+  if (users[i].email.value !== authUser.email2.value) {
+      alert('Пользователь не зарегистрирован!')
+    } else if (users[i].email.value === authUser.email2.value && users[i].pw.value !== authUser.pw2.value) {
+      alert('Пароль введён неверно!')
+    } else {
+      localStorage.setItem("E-mail", authUser.email2.value)
+    }    
+  }
+})
 }
 
 import {invalidClass} from './constants.js';
 
 import {users} from './constants.js';
 
-btn2.addEventListener('click', (event) => {
 
-  users.forEach(function(checkAuthUser) {
-  if (users[i].email.value !== authUser.email2.value) {
-      alert('Пользователь не зарегистрирован!')
-    } else if (users[i].email.value === authUser.email2.value && users[i].pw.value !== authUser.pw2.value) {
-      alert('Пароль введён неверно!')
-    } else {
-      console.log(users[i])
-    }    
-  })
-})
 

@@ -36,6 +36,14 @@ const newUser = {
     }
   },
 
+  repeatPw: {
+    value: '',
+    valid: false,
+    checkValidation() {
+      this.repeatPw.valid = this.repeatPw.value !== '' && this.pw.value === this.repeatPw.value;
+    }
+  },
+
   checkFormValidation() {
     for (const key in this) {
       if (typeof this[key] !== 'function' && this[key].valid === false) {
@@ -65,7 +73,7 @@ signUpForm.addEventListener('input', (event) => {
   const bindedValidator = newUser[signupName].checkValidation.bind(newUser);
   bindedValidator();
 
-  btn.disabled = !newUser.checkFormValidation();
+  // btn.disabled = !newUser.checkFormValidation();
 
   handleClassAdding(event.target, newUser[signupName].valid);
 })
@@ -78,6 +86,15 @@ function handleClassAdding(domNode, isValid) {
     domNode.classList.remove(invalidClass)
   }
 }
+
+btn.addEventListener('click', (event) => {
+
+  event.preventDefault();
+  users.push(newUser);
+  signUpForm.reset();
+})
+
 }
 
 import {invalidClass} from './constants.js';
+import {users} from './constants.js'
