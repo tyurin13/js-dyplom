@@ -1,1 +1,3 @@
-export const INVALID_CLASS = "invalid";
+export const invalidClass = 'invalid';
+export const users = [];
+

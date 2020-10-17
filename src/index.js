@@ -1,31 +1,31 @@
-import { initLogin } from "./login";
-import { initRegister } from "./register";
+import "./assets/styles/style.scss"
 
-import "./assets/styles/style.scss";
+const tabActive = document.getElementById('tabActive');
+const tab = document.getElementById('tab');
+const signUp = document.getElementById('signup');
+const logIn = document.getElementById('login');
 
-const { loginForm, setDisabledButtonState } = initLogin();
-const { registerForm, handleRegisterButtonDisabledState } = initRegister();
+tab.addEventListener('click', (event) => {
 
-const setLoginBtn = document.getElementById("setLoginBtn");
-const setRegisterBtn = document.getElementById("setRegisterBtn");
+  logIn.style.display = 'block';
+  tab.style.backgroundColor= 'darkgreen';
+  tabActive.style.background = 'rgba(211, 211, 211, .25)';
+  signUp.style.display = 'none';
+})
 
-setLoginBtn.addEventListener("click", setLoginFormActive);
-setRegisterBtn.addEventListener("click", setRegisterFormActive);
+tabActive.addEventListener('click', (event) => {
 
-setLoginFormActive();
+  signUp.style.display = 'block';
+  tab.style.backgroundColor= 'rgba(211, 211, 211, .25)';
+  tabActive.style.backgroundColor = 'darkgreen';
+  logIn.style.display = 'none';
+})
 
-function setLoginFormActive() {
-  loginForm.style.display = "block";
-  registerForm.style.display = "none";
-  setLoginBtn.classList.add("active-btn");
-  setRegisterBtn.classList.remove("active-btn");
-  setDisabledButtonState();
-}
 
-function setRegisterFormActive() {
-  loginForm.style.display = "none";
-  registerForm.style.display = "block";
-  setLoginBtn.classList.remove("active-btn");
-  setRegisterBtn.classList.add("active-btn");
-  handleRegisterButtonDisabledState();
-}
+import {initLogin} from './login.js';
+
+const fnLogin = initLogin();
+
+import {initRegister} from './register.js';
+
+const fnRegister = initRegister();

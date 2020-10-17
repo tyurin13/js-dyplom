@@ -1,93 +1,100 @@
-import { INVALID_CLASS } from "./constants";
-
 export function initRegister() {
-  const btn = document.getElementById("btn");
-  const registerForm = document.forms["register"];
 
-  const formHelper = {
-    name: {
-      value: "",
-      valid: false,
-      validationChecker() {
-        this.name.valid = this.name.value.length !== 0;
-      },
-    },
+const signUpForm = document.forms.signup;
+const btn = document.getElementById('btn');
 
-    email: {
-      value: "",
-      valid: false,
-      validationChecker() {
-        const emailRegex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g);
-        this.email.valid = emailRegex.test(this.email.value);
-      },
-    },
-    repeatPassword: {
-      value: "",
-      valid: false,
-      validationChecker() {
-        this.repeatPassword.valid =
-          this.repeatPassword.value === this.password.value;
-      },
-    },
-    password: {
-      value: "",
-      valid: false,
-      validationChecker() {
-        this.password.valid = this.password.value.length !== 0;
-      },
-    },
-
-    checkFormValidation() {
-      for (const key in this) {
-        if (typeof this[key] !== "function" && !this[key].valid) {
-          return false;
-        }
-      }
-      return true;
-    },
-
-    getData() {
-      return {
-        name: this.name.value,
-        email: this.email.value,
-        password: this.password.value,
-      };
-    },
-  };
-
-  registerForm.addEventListener("input", (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    formHelper[name].value = value;
-    const bindedHandler = formHelper[name].validationChecker.bind(formHelper);
-    bindedHandler(value);
-    handleAddingValidate(event.target, formHelper[name].valid);
-    handleRegisterButtonDisabledState();
-  });
-
-  registerForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = formHelper.getData();
-    console.log(data);
-  });
-
-  function handleAddingValidate(node, isValid) {
-    if (!isValid && !node.classList.contains(INVALID_CLASS)) {
-      node.classList.add(INVALID_CLASS);
+const newUser = {
+  firstName: {
+    value: '',
+    valid: false,
+    checkValidation() {
+      this.firstName.valid = this.firstName.value !== '';
     }
+  },
 
-    if (isValid && node.classList.contains(INVALID_CLASS)) {
-      node.classList.remove(INVALID_CLASS);
+  lastName: {
+    value: '',
+    valid: false,
+    checkValidation() {
+      this.lastName.valid = this.lastName.value !== '';
+    }
+  },
+
+  email: {
+    value: '',
+    valid: false,
+    checkValidation() {
+      this.email.valid = this.email.value !== '' && /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(this.email.value);
+    }
+  },
+
+  pw: {
+    value: '',
+    valid: false,
+    checkValidation() {
+      this.pw.valid = this.pw.value !== '';
+    }
+  },
+
+  repeatPw: {
+    value: '',
+    valid: false,
+    checkValidation() {
+      this.repeatPw.valid = this.repeatPw.value !== '' && this.pw.value === this.repeatPw.value;
+    }
+  },
+
+  checkFormValidation() {
+    for (const key in this) {
+      if (typeof this[key] !== 'function' && this[key].valid === false) {
+        return false
+      } 
+    }
+  },
+
+  getValue() {
+    return {
+
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      email: this.email.value,
+      pw: this.pw.value
     }
   }
-
-  function handleRegisterButtonDisabledState() {
-    btn.disabled = !formHelper.checkFormValidation();
-  }
-
-  return {
-    registerForm,
-    handleRegisterButtonDisabledState,
-  };
+  
 }
+
+signUpForm.addEventListener('input', (event) => {
+  
+  event.preventDefault();
+  const signupValue = event.target.value;
+  const signupName = event.target.name;
+  newUser[signupName].value = signupValue;
+  const bindedValidator = newUser[signupName].checkValidation.bind(newUser);
+  bindedValidator();
+
+  // btn.disabled = !newUser.checkFormValidation();
+
+  handleClassAdding(event.target, newUser[signupName].valid);
+})
+
+function handleClassAdding(domNode, isValid) {
+
+  if (!isValid) {
+    domNode.classList.add(invalidClass)
+  } else {
+    domNode.classList.remove(invalidClass)
+  }
+}
+
+btn.addEventListener('click', (event) => {
+
+  event.preventDefault();
+  users.push(newUser);
+  signUpForm.reset();
+})
+
+}
+
+import {invalidClass} from './constants.js';
+import {users} from './constants.js'
