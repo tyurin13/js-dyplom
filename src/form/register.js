@@ -96,5 +96,5 @@ btn.addEventListener('click', (event) => {
 
 }
 
-import {invalidClass} from './constants.js';
-import {users} from './constants.js'
+import {invalidClass} from '../constants';
+import {users} from '../constants'
