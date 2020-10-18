@@ -1,3 +1,7 @@
+import {invalidClass} from '../constants';
+
+import {users} from '../constants';
+
 export function initLogin() {
 
 const loginForm = document.forms.login;
@@ -75,9 +79,7 @@ btn2.addEventListener('click', (event) => {
 })
 }
 
-import {invalidClass} from '../constants';
 
-import {users} from '../constants';
 
 
 
