@@ -7,10 +7,10 @@ import {initMainPage} from "./mainpage/mainpage"
 
 export const initRouter =() => {
   window.addEventListener('hashchange', () =>{
-    if (window.location.hash === "#/clients") {protector(createClientsTable())}
+    if (window.location.hash === "#/clients") {protector(createClientsTable)}
     else if (window.location.hash === "#/form") {initForm(); initLogin(); initRegister()}
-    else if (window.location.hash === "#/calendar") {protector(initCalendar())}
-    else if (window.location.hash === "#/mainpage") {protector(initMainPage())}
+    else if (window.location.hash === "#/calendar") {protector(initCalendar)}
+    else if (window.location.hash === "#/mainpage") {protector(initMainPage)}
   }
 )}
 

@@ -16,9 +16,9 @@ export function clientsDataBase(staff) {
     empty.append(row);
   
     if (element.gender === 'female') {
-      femaleNumber = femaleNumber++
+      femaleNumber++
     } else if (element.gender === 'male') {
-      maleNumber = maleNumber++
+      maleNumber++
     }
   
     let cellName = document.createElement('td');

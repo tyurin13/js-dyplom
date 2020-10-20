@@ -67,15 +67,22 @@ function handleClassAdding(domNode, isValid) {
 btn2.addEventListener('click', (event) => {
 
   event.preventDefault();
-  for (let i = 1; i < users.length; i++) {
-  if (users[i].email.value !== authUser.email2.value) {
-      alert('Пользователь не зарегистрирован!')
-    } else if (users[i].email.value === authUser.email2.value && users[i].pw.value !== authUser.pw2.value) {
-      alert('Пароль введён неверно!')
-    } else {
-      localStorage.setItem("E-mail", authUser.email2.value)
-    }    
-  }
+  const userFromDataBase = users.find(
+    (user) => user.email.value === authUser.email2.value);
+
+  const loginFromDataBase = users.find(
+    (user) => user.email.value === authUser.email2.value && user.pw.value === authUser.pw2.value
+  );
+  
+  if (!userFromDataBase) {
+      alert('Пользователь не зарегистрирован!');
+      return
+    } else if (!loginFromDataBase) {
+      alert('Пароль введён неверно!');
+      return
+    }
+
+  localStorage.setItem("E-mail", authUser.email2.value)  
 })
 }
 
