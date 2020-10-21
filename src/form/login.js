@@ -50,7 +50,7 @@ loginForm.addEventListener('input', (event) => {
   const bindedValidator2 = authUser[loginName].checkValidation.bind(authUser);
   bindedValidator2();
 
-  // btn2.disabled = !authUser.checkFormValidation();
+  btn2.disabled = !authUser.checkFormValidation();
 
   handleClassAdding(event.target, authUser[loginName].valid);
 })

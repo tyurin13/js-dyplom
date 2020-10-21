@@ -5,6 +5,7 @@ export function clientsDataBase(staff) {
   let femaleNumber = 0;
   let maleNumber = 0;
   let arrBalance = [];
+  let entryBalance = '';
   let maxBalance = 0;
   const empty = document.getElementById('empty');
   
@@ -61,7 +62,7 @@ export function clientsDataBase(staff) {
   empty.prepend(genderNumbers);
   
   arrBalance.forEach(function(sum) {
-    if (sum > maxBalance) {
+    if (sum.match(/\d+/) > maxBalance) {
       maxBalance = sum
     }
   })
@@ -69,4 +70,4 @@ export function clientsDataBase(staff) {
   const maxBalanceBlock = document.createElement('div');
   maxBalanceBlock.innerText = `Максимальный баланс среди пользователей составляет ${maxBalance} доллара`;
   genderNumbers.append(maxBalanceBlock)
-  }
+}

@@ -73,7 +73,7 @@ signUpForm.addEventListener('input', (event) => {
   const bindedValidator = newUser[signupName].checkValidation.bind(newUser);
   bindedValidator();
 
-  // btn.disabled = !newUser.checkFormValidation();
+  btn.disabled = !newUser.checkFormValidation();
 
   handleClassAdding(event.target, newUser[signupName].valid);
 })
